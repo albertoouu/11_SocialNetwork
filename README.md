@@ -1,7 +1,7 @@
 # 11_SocialNetwork
 Social network using React JS and Firebase
 
-![](https://media.giphy.com/media/d1FL3HftUyMPMUwM/giphy.gif)
+![](https://cdn.hackernoon.com/images/1*KBGdMaU_emZX4XR1AvkD4A.gif)
 
 Social Media culture is the center of the current human interaction since covid-19 set up in our cities and push us to stay at home. Sharing content with people is something that we can keep enjoying without being in the same place and with the boom of the Social Networks like Twitter, Facebook, Instagram, Snapchat and LinkedIn nowadays we easily can share anything, from anywhere to anybody. But, what about when we want to share only with selected people that will take care of the content? How can we restrict this interactions only to the people that is interested about and not only some of our friends? 
 
