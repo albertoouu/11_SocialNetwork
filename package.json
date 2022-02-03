@@ -1,7 +1,7 @@
 {
   "name": "11_socialnetwork",
   "version": "0.1.0",
-  "homepage": "http//albertoouu.github.io/11_socialnetwork",
+  "homepage": "http://albertoouu.github.io/11_socialnetwork",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
