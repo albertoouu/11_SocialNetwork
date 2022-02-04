@@ -11,7 +11,7 @@ import {
 } from "firebase/firestore";
 
 import { Button, Container } from "react-bootstrap";
-import AgregarTarea from "./AgregarTarea";
+import AgregarPost from "./AgregarTarea";
 import NewsFeed from "./NewsFeed";
 
 const auth = getAuth(firebaseApp);
@@ -50,7 +50,11 @@ const Home = ({ correoUsuario }) => {
       <h4>Hola, sesión iniciada</h4>
       <Button onClick={() => signOut(auth)}>Cerrar sesion</Button>
       <hr />
-      <AgregarTarea />
+      <AgregarPost
+        arrayPosts={arrayPosts}
+        correoUsuario={correoUsuario}
+        setArrayPosts={setArrayPosts}
+      />
       {arrayPosts ? <NewsFeed arrayPosts={arrayPosts} /> : null}
     </Container>
   );
