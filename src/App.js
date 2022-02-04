@@ -1,22 +1,25 @@
-import logo from "./logo.svg";
-import "./App.css";
+import React, { useState, useEffect } from "react";
+import Home from "./components/Home";
+import LogIn from "./components/LogIn";
+
+import firebaseApp from "./credenciales";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+const auth = getAuth(firebaseApp);
 
 function App() {
+  const [usuarioGlobal, setUsuarioGlobal] = useState(null);
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      setUsuarioGlobal(user);
+    } else {
+      setUsuarioGlobal(null);
+    }
+  });
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hola mudo</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {usuarioGlobal ? <Home correoUsuario={usuarioGlobal.email} /> : <LogIn />}
+    </>
   );
 }
 
