@@ -21,14 +21,13 @@ const firestore = getFirestore(firebaseApp);
 
 const Home = ({ correoUsuario }) => {
   const [arrayPosts, setArrayPosts] = useState(null);
+  const [userInfo, setUserInfo] = useState(null);
 
-  const fakeData = [
-    {
-      email: "albertoouu@gmail.com",
-      nickname: "albertoouu",
-      photo: "http://picsum.photos/200",
-    },
-  ];
+  const fakeData = {
+    email: "albertoouu@gmail.com",
+    nickname: "albertoouu",
+    photo: "http://picsum.photos/200",
+  };
 
   async function buscarDocumentoOCrearDocumento(idDocumento) {
     //crear refernecia al documento
@@ -43,7 +42,7 @@ const Home = ({ correoUsuario }) => {
     } else {
       //si no existe
       await setDoc(docuRef, {
-        email: "por defecto",
+        email: idDocumento,
         nickname: "por defecto",
         photo: "http://picsum.photos/200",
       });
@@ -70,6 +69,9 @@ const Home = ({ correoUsuario }) => {
     async function traerColl() {
       const postsObtenidos = await traerPosts();
       setArrayPosts(postsObtenidos);
+      const infoUser = await buscarDocumentoOCrearDocumento(correoUsuario);
+      setUserInfo(infoUser);
+      console.log(infoUser);
     }
     traerColl();
   }, []);
@@ -84,7 +86,9 @@ const Home = ({ correoUsuario }) => {
         correoUsuario={correoUsuario}
         setArrayPosts={setArrayPosts}
       />
-      <PerfilSection correoUsuario={correoUsuario} userInfo={fakeData} />
+      {userInfo ? (
+        <PerfilSection correoUsuario={correoUsuario} userInfo={userInfo} />
+      ) : null}
       {arrayPosts ? (
         <NewsFeed
           arrayPosts={arrayPosts}
