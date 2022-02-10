@@ -4,27 +4,53 @@ import firebaseApp from "../credenciales";
 import { getAuth, signOut } from "firebase/auth";
 import {
   getFirestore,
-  doc,
-  getDoc,
   collection,
   getDocs,
+  doc,
+  getDoc,
+  setDoc,
 } from "firebase/firestore";
 
 import { Button, Container } from "react-bootstrap";
-import AgregarPost from "./AgregarTarea";
+import AgregarPost from "./AgregarPost";
 import NewsFeed from "./NewsFeed";
+import PerfilSection from "./PerfilSection";
 
 const auth = getAuth(firebaseApp);
 const firestore = getFirestore(firebaseApp);
 
 const Home = ({ correoUsuario }) => {
   const [arrayPosts, setArrayPosts] = useState(null);
+  const [userInfo, setUserInfo] = useState(null);
 
-  const fakeData = [
-    { id: 1, description: "tarea falsa 1", url: "http://picsum.photos/420" },
-    { id: 2, description: "tarea falsa 2", url: "http://picsum.photos/420" },
-    { id: 3, description: "tarea falsa 3", url: "http://picsum.photos/420" },
-  ];
+  const fakeData = {
+    email: "albertoouu@gmail.com",
+    nickname: "albertoouu",
+    photo: "http://picsum.photos/200",
+  };
+
+  async function buscarDocumentoOCrearDocumento(idDocumento) {
+    //crear refernecia al documento
+    const docuRef = doc(firestore, `Users/${idDocumento}`);
+    //Buscar documento
+    const consulta = await getDoc(docuRef);
+    //revisar si existe
+    if (consulta.exists()) {
+      //si si existe
+      const infoDocu = consulta.data();
+      return infoDocu;
+    } else {
+      //si no existe
+      await setDoc(docuRef, {
+        email: idDocumento,
+        nickname: "por defecto",
+        photo: "http://picsum.photos/200",
+      });
+      const consulta = await getDoc(docuRef);
+      const infoDocu = consulta.data();
+      return infoDocu;
+    }
+  }
 
   async function traerPosts() {
     //crea una referencia a la coleccion
@@ -32,7 +58,9 @@ const Home = ({ correoUsuario }) => {
     const posts = [];
     const querySnapshot = await getDocs(coleccRef);
     querySnapshot.forEach((doc) => {
-      posts.push(doc.data());
+      let post = doc.data();
+      post.id = doc.id;
+      posts.push(post);
     });
     return posts;
   }
@@ -41,6 +69,9 @@ const Home = ({ correoUsuario }) => {
     async function traerColl() {
       const postsObtenidos = await traerPosts();
       setArrayPosts(postsObtenidos);
+      const infoUser = await buscarDocumentoOCrearDocumento(correoUsuario);
+      setUserInfo(infoUser);
+      console.log(infoUser);
     }
     traerColl();
   }, []);
@@ -55,7 +86,16 @@ const Home = ({ correoUsuario }) => {
         correoUsuario={correoUsuario}
         setArrayPosts={setArrayPosts}
       />
-      {arrayPosts ? <NewsFeed arrayPosts={arrayPosts} /> : null}
+      {userInfo ? (
+        <PerfilSection correoUsuario={correoUsuario} userInfo={userInfo} />
+      ) : null}
+      {arrayPosts ? (
+        <NewsFeed
+          arrayPosts={arrayPosts}
+          correoUsuario={correoUsuario}
+          setArrayPosts={setArrayPosts}
+        />
+      ) : null}
     </Container>
   );
 };

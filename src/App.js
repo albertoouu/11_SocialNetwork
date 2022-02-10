@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Home from "./components/Home";
 import LogIn from "./components/LogIn";
+import SignInSide from "./components/LogIn2";
 
 import firebaseApp from "./credenciales";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -18,7 +19,11 @@ function App() {
   });
   return (
     <>
-      {usuarioGlobal ? <Home correoUsuario={usuarioGlobal.email} /> : <LogIn />}
+      {usuarioGlobal ? (
+        <Home correoUsuario={usuarioGlobal.email} />
+      ) : (
+        <SignInSide />
+      )}
     </>
   );
 }
