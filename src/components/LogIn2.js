@@ -22,6 +22,8 @@ import {
   signInWithRedirect,
   GoogleAuthProvider,
 } from "firebase/auth";
+import IconButton from "@mui/material/IconButton";
+import GoogleIcon from "@mui/icons-material/Google";
 const auth = getAuth(firebaseApp);
 const googleProvider = new GoogleAuthProvider();
 
@@ -138,15 +140,13 @@ export default function SignInSide() {
               >
                 {estaRegistrandose ? "Regisrate" : "Inicia sesión"}
               </Button>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+              <IconButton
+                aria-label="GoogleButton"
+                color="error"
                 onClick={() => signInWithRedirect(auth, googleProvider)}
               >
-                Accede con Google
-              </Button>
+                <GoogleIcon />
+              </IconButton>
               <Grid container>
                 <Grid item xs></Grid>
                 <Grid item>
