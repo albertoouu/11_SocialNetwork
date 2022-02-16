@@ -20,7 +20,7 @@ function App() {
   return (
     <>
       {usuarioGlobal ? (
-        <Home correoUsuario={usuarioGlobal.email} />
+        <Home correoUsuario={usuarioGlobal.email} photoGoogle={usuarioGlobal.photoURL} nombreGoogle = {usuarioGlobal.displayName} />
       ) : (
         <SignInSide />
       )}

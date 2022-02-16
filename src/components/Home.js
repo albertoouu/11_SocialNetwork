@@ -19,7 +19,7 @@ import PerfilSection from "./PerfilSection";
 const auth = getAuth(firebaseApp);
 const firestore = getFirestore(firebaseApp);
 
-const Home = ({ correoUsuario }) => {
+const Home = ({ correoUsuario, photoGoogle, nombreGoogle }) => {
   const [arrayPosts, setArrayPosts] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
 
@@ -43,7 +43,7 @@ const Home = ({ correoUsuario }) => {
       //si no existe
       await setDoc(docuRef, {
         email: idDocumento,
-        nickname: "por defecto",
+        nickname: "por defecto", // arreglar que cuando sea usuario de google se guarde su foto
         photo: "http://picsum.photos/200",
       });
       const consulta = await getDoc(docuRef);
@@ -87,7 +87,12 @@ const Home = ({ correoUsuario }) => {
         setArrayPosts={setArrayPosts}
       />
       {userInfo ? (
-        <PerfilSection correoUsuario={correoUsuario} userInfo={userInfo} />
+        <PerfilSection
+          correoUsuario={correoUsuario}
+          userInfo={userInfo}
+          photoGoogle={photoGoogle}
+          nombreGoogle={nombreGoogle}
+        />
       ) : null}
       {arrayPosts ? (
         <NewsFeed
