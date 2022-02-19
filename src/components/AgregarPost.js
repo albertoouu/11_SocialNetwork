@@ -35,7 +35,7 @@ const AgregarPost = ({ correoUsuario, arrayPosts, setArrayPosts }) => {
   }
 
   return (
-    <Container>
+    <Container className="mt-5">
       <Form onSubmit={newPost} id="formre">
         <Form.Control
           className="mb-3"

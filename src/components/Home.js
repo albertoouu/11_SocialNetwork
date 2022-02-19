@@ -15,6 +15,7 @@ import { Button, Container } from "react-bootstrap";
 import AgregarPost from "./AgregarPost";
 import NewsFeed from "./NewsFeed";
 import PerfilSection from "./PerfilSection";
+import ResponsiveAppBar from "./AppBar"
 
 const auth = getAuth(firebaseApp);
 const firestore = getFirestore(firebaseApp);
@@ -78,8 +79,9 @@ const Home = ({ correoUsuario, photoGoogle, nombreGoogle }) => {
 
   return (
     <Container>
+      <ResponsiveAppBar />
       <h4>Hola, sesión iniciada</h4>
-      <Button onClick={() => signOut(auth)}>Cerrar sesion</Button>
+      <Button onClick={() => signOut(auth)} className="mt-5">Cerrar sesion</Button>
       <hr />
       <AgregarPost
         arrayPosts={arrayPosts}
