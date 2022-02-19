@@ -2,6 +2,7 @@ import React from "react";
 import { Stack, Container, Button } from "react-bootstrap";
 import firebaseApp from "../credenciales";
 import { getFirestore, doc, deleteDoc } from "firebase/firestore";
+import FormDialog from "./modal";
 
 const firestore = getFirestore(firebaseApp);
 
@@ -17,6 +18,9 @@ const NewsFeed = ({ arrayPosts, correoUsuario, setArrayPosts }) => {
     //Actualizar state
     setArrayPosts(nuevoArray);
   };
+  let editarPost = async (id) => {
+    console.log(id)
+  }
   return (
     <Container>
       <Stack>
@@ -29,9 +33,12 @@ const NewsFeed = ({ arrayPosts, correoUsuario, setArrayPosts }) => {
               <p>{obj.content}</p>
               <p>{obj.cardcontent}</p>
               {correoUsuario === obj.author ? (
-                <Button onClick={() => eliminarPost(obj.id)}>
-                  Eliminar Post
-                </Button>
+                <>
+                  <FormDialog postId={obj.id} setArrayPosts={setArrayPosts} />
+                  <Button onClick={() => eliminarPost(obj.id)}>
+                    Eliminar Post
+                  </Button>
+                </>
               ) : (
                 <div>"no es su correo"</div>
               )}

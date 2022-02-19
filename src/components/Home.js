@@ -15,11 +15,12 @@ import { Button, Container } from "react-bootstrap";
 import AgregarPost from "./AgregarPost";
 import NewsFeed from "./NewsFeed";
 import PerfilSection from "./PerfilSection";
+import ResponsiveAppBar from "./AppBar"
 
 const auth = getAuth(firebaseApp);
 const firestore = getFirestore(firebaseApp);
 
-const Home = ({ correoUsuario }) => {
+const Home = ({ correoUsuario, photoGoogle, nombreGoogle }) => {
   const [arrayPosts, setArrayPosts] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
 
@@ -43,7 +44,7 @@ const Home = ({ correoUsuario }) => {
       //si no existe
       await setDoc(docuRef, {
         email: idDocumento,
-        nickname: "por defecto",
+        nickname: "por defecto", // arreglar que cuando sea usuario de google se guarde su foto
         photo: "http://picsum.photos/200",
       });
       const consulta = await getDoc(docuRef);
@@ -78,8 +79,9 @@ const Home = ({ correoUsuario }) => {
 
   return (
     <Container>
+      <ResponsiveAppBar />
       <h4>Hola, sesión iniciada</h4>
-      <Button onClick={() => signOut(auth)}>Cerrar sesion</Button>
+      <Button onClick={() => signOut(auth)} className="mt-5">Cerrar sesion</Button>
       <hr />
       <AgregarPost
         arrayPosts={arrayPosts}
@@ -87,7 +89,12 @@ const Home = ({ correoUsuario }) => {
         setArrayPosts={setArrayPosts}
       />
       {userInfo ? (
-        <PerfilSection correoUsuario={correoUsuario} userInfo={userInfo} />
+        <PerfilSection
+          correoUsuario={correoUsuario}
+          userInfo={userInfo}
+          photoGoogle={photoGoogle}
+          nombreGoogle={nombreGoogle}
+        />
       ) : null}
       {arrayPosts ? (
         <NewsFeed
