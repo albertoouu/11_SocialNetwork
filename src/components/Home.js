@@ -11,16 +11,20 @@ import {
   setDoc,
 } from "firebase/firestore";
 
-import { Button, Container } from "react-bootstrap";
 import AgregarPost from "./AgregarPost";
 import NewsFeed from "./NewsFeed";
 import PerfilSection from "./PerfilSection";
 import ResponsiveAppBar from "./AppBar"
+import Container from '@mui/material/Container'
+import Button from '@mui/material/Button'
+import Grid from '@mui/material/Grid'
+import Paper from '@mui/material/Paper';
+import { styled } from '@mui/material/styles';
 
 const auth = getAuth(firebaseApp);
 const firestore = getFirestore(firebaseApp);
 
-const Home = ({ correoUsuario, photoGoogle, nombreGoogle }) => {
+const Home = ({ correoUsuario, userPhoto, userNombre }) => {
   const [arrayPosts, setArrayPosts] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
 
@@ -77,32 +81,51 @@ const Home = ({ correoUsuario, photoGoogle, nombreGoogle }) => {
     traerColl();
   }, []);
 
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  }));
+
   return (
+
     <Container>
       <ResponsiveAppBar />
-      <h4>Hola, sesión iniciada</h4>
-      <Button onClick={() => signOut(auth)} className="mt-5">Cerrar sesion</Button>
-      <hr />
-      <AgregarPost
-        arrayPosts={arrayPosts}
-        correoUsuario={correoUsuario}
-        setArrayPosts={setArrayPosts}
-      />
-      {userInfo ? (
-        <PerfilSection
-          correoUsuario={correoUsuario}
-          userInfo={userInfo}
-          photoGoogle={photoGoogle}
-          nombreGoogle={nombreGoogle}
-        />
-      ) : null}
-      {arrayPosts ? (
-        <NewsFeed
-          arrayPosts={arrayPosts}
-          correoUsuario={correoUsuario}
-          setArrayPosts={setArrayPosts}
-        />
-      ) : null}
+      <Grid container spacing={2} className="mt-5" >
+        <Grid item xs={2}>
+        </Grid>
+        <Grid item xs={7}>
+          <AgregarPost
+            arrayPosts={arrayPosts}
+            correoUsuario={correoUsuario}
+            setArrayPosts={setArrayPosts}
+          />
+          {arrayPosts ? (
+            <NewsFeed
+              arrayPosts={arrayPosts}
+              correoUsuario={correoUsuario}
+              setArrayPosts={setArrayPosts}
+              userPhoto={userPhoto}
+              userNombre={userNombre}
+            />
+          ) : null}
+        </Grid>
+        <Grid item xs={3}>
+          {userInfo ? (
+            <PerfilSection
+              correoUsuario={correoUsuario}
+              userInfo={userInfo}
+              userPhoto={userPhoto}
+              userNombre={userNombre}
+            />
+          ) : null}
+        </Grid>
+      </Grid>
+
+
+
     </Container>
   );
 };

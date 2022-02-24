@@ -68,7 +68,7 @@ export default function FormDialog({ postId, setArrayPosts }) {
   }
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button variant="contained" onClick={handleClickOpen} className='ms-3' >
         Edit
       </Button>
       <Dialog open={open} onClose={handleClose} onSubmit={handleSubmit}>

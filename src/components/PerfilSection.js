@@ -1,11 +1,11 @@
 import React from "react";
 
-const PerfilSection = ({ correoUsuario, userInfo, photoGoogle, nombreGoogle }) => {
+const PerfilSection = ({ correoUsuario, userInfo, userPhoto, userNombre }) => {
   return (
     <>
       <div key={userInfo.email}>
         <h3>{userInfo.email}</h3>
-        {nombreGoogle == null ? (
+        {userNombre == null ? (
           <div>
             <h4>{userInfo.nickname}</h4>
             <img src={userInfo.photo} alt={"perfilPhoto"} />
@@ -13,8 +13,8 @@ const PerfilSection = ({ correoUsuario, userInfo, photoGoogle, nombreGoogle }) =
 
         ) : (
           <div>
-            <h4>{nombreGoogle}</h4>
-            <img src={photoGoogle} alt={"perfilPhoto"} />
+            <h4>{userNombre}</h4>
+            <img src={userPhoto} alt={"perfilPhoto"} />
           </div>
         )}
 
