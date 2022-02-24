@@ -30,6 +30,7 @@ const AgregarPost = ({ correoUsuario, arrayPosts, setArrayPosts }) => {
         author,
         content,
         Date: new Date(),
+        img: urlDescarga
       });
     } catch (e) {
       console.log("Error adding document", e);
