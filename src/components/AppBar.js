@@ -18,7 +18,7 @@ const auth = getAuth(firebaseApp);
 
 
 
-const pages = ['Products', 'Pricing', 'Blog'];
+const pages = ['NewPost'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const ResponsiveAppBar = () => {
