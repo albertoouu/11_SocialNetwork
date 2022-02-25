@@ -24,6 +24,7 @@ import {
 } from "firebase/auth";
 import IconButton from "@mui/material/IconButton";
 import GoogleIcon from "@mui/icons-material/Google";
+
 const auth = getAuth(firebaseApp);
 const googleProvider = new GoogleAuthProvider();
 
@@ -147,6 +148,7 @@ export default function SignInSide() {
               >
                 <GoogleIcon />
               </IconButton>
+              <Typography variant="body2" color="error">Continue with google</Typography>
               <Grid container>
                 <Grid item xs></Grid>
                 <Grid item>
