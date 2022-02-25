@@ -35,14 +35,13 @@ export default function RecipeReviewCard({ obj, arrayPosts, setArrayPosts, corre
     setArrayPosts(nuevoArray);
   };
 
-
-
+  const letter = obj.author[0].toUpperCase()
   return (
     <Card sx={{ maxWidth: 1000 }} className='mb-3'>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
+            {letter}
           </Avatar>
         }
         action={

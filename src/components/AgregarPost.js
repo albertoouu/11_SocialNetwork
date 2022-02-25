@@ -2,7 +2,6 @@ import React from "react";
 import firebaseApp from "../credenciales";
 import { getFirestore, addDoc, collection, getDocs } from "firebase/firestore";
 import Box from '@mui/material/Box';
-import { Container, Form } from "react-bootstrap";
 import TextField from '@mui/material/TextField';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';

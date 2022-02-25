@@ -76,7 +76,6 @@ const Home = ({ correoUsuario, userPhoto, userNombre }) => {
       setArrayPosts(postsObtenidos);
       const infoUser = await buscarDocumentoOCrearDocumento(correoUsuario);
       setUserInfo(infoUser);
-      console.log(infoUser);
     }
     traerColl();
   }, []);
@@ -92,16 +91,25 @@ const Home = ({ correoUsuario, userPhoto, userNombre }) => {
   return (
 
     <Container>
-      <ResponsiveAppBar />
-      <Grid container spacing={2} className="mt-5" >
-        <Grid item xs={2}>
+      <ResponsiveAppBar
+        arrayPosts={arrayPosts}
+        correoUsuario={correoUsuario}
+        setArrayPosts={setArrayPosts}
+        userPhoto={userPhoto}
+        userNombre={userNombre}
+      />
+      <Grid container spacing={2} sx={{ my: 10 }} >
+        <Grid item xs={12} md={3}>
+          {userInfo ? (
+            <PerfilSection
+              correoUsuario={correoUsuario}
+              userInfo={userInfo}
+              userPhoto={userPhoto}
+              userNombre={userNombre}
+            />
+          ) : null}
         </Grid>
-        <Grid item xs={7}>
-          <AgregarPost
-            arrayPosts={arrayPosts}
-            correoUsuario={correoUsuario}
-            setArrayPosts={setArrayPosts}
-          />
+        <Grid item xs={12} md={7}>
           {arrayPosts ? (
             <NewsFeed
               arrayPosts={arrayPosts}
@@ -112,15 +120,8 @@ const Home = ({ correoUsuario, userPhoto, userNombre }) => {
             />
           ) : null}
         </Grid>
-        <Grid item xs={3}>
-          {userInfo ? (
-            <PerfilSection
-              correoUsuario={correoUsuario}
-              userInfo={userInfo}
-              userPhoto={userPhoto}
-              userNombre={userNombre}
-            />
-          ) : null}
+
+        <Grid item xs={12} md={2}>
         </Grid>
       </Grid>
 
