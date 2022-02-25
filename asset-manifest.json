@@ -1,14 +1,15 @@
 {
   "files": {
     "main.css": "/11_socialnetwork/static/css/main.1a8a0596.css",
-    "main.js": "/11_socialnetwork/static/js/main.89e2781e.js",
+    "main.js": "/11_socialnetwork/static/js/main.9791d324.js",
     "static/media/neron.jpg": "/11_socialnetwork/static/media/neron.5aca8b088d4a7ae0680e.jpg",
+    "static/media/DogTraining.png": "/11_socialnetwork/static/media/DogTraining.99c2510a7ef50ab1f0a2.png",
     "index.html": "/11_socialnetwork/index.html",
     "main.1a8a0596.css.map": "/11_socialnetwork/static/css/main.1a8a0596.css.map",
-    "main.89e2781e.js.map": "/11_socialnetwork/static/js/main.89e2781e.js.map"
+    "main.9791d324.js.map": "/11_socialnetwork/static/js/main.9791d324.js.map"
   },
   "entrypoints": [
     "static/css/main.1a8a0596.css",
-    "static/js/main.89e2781e.js"
+    "static/js/main.9791d324.js"
   ]
 }
